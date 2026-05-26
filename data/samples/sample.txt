@@ -1,0 +1,5 @@
+Professional RAG Platform 示例文档
+
+本项目面向专业文档问答场景，目标是逐步实现文档解析、文本切分、Embedding 入库、混合检索、Rerank、答案生成、引用溯源和自动评估。
+
+第一版只提供 FastAPI 服务、健康检查接口和 mock 问答接口。

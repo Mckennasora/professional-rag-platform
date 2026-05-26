@@ -1,0 +1,34 @@
+[project]
+name = "professional-rag-platform"
+version = "0.1.0"
+description = "A FastAPI-based RAG platform for professional document question answering."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "pydantic",
+    "pydantic-settings",
+    "python-dotenv",
+    "python-multipart",
+    "pypdf",
+    "langchain",
+    "langchain-community",
+    "sentence-transformers",
+    "transformers",
+    "torch",
+    "sqlalchemy",
+    "psycopg2-binary",
+    "pgvector",
+    "ragas",
+    "datasets",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
