@@ -89,6 +89,20 @@ uv run pytest
 - 预留文档上传、评估、Embedding、Retriever、Rerank、Repository、ORM 模块。
 - 初始化 sample 文档和 eval 数据文件。
 
+## Git 与版本控制
+
+项目使用 Git 做阶段化版本管理，推荐在每个稳定阶段通过 tag 固化快照，例如 `v0.1.0` 表示项目骨架和 mock 接口版本。详细规范见 [docs/git_workflow.md](docs/git_workflow.md)。
+
+推荐第一版验证通过后：
+
+```bash
+git add .
+git commit -m "feat: initialize FastAPI RAG project skeleton"
+git tag -a v0.1.0 -m "v0.1.0: initialize FastAPI project skeleton"
+```
+
+后续 GitHub Actions 可以基于 `push`、`pull_request` 和 `v*.*.*` tag 触发自动测试、构建和发布。
+
 ## 路线图
 
 详细路线图见 [docs/roadmap.md](docs/roadmap.md)。
