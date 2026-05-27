@@ -84,9 +84,11 @@ uv run pytest
 
 - FastAPI 应用初始化。
 - `GET /health` 健康检查。
-- `POST /api/chat` mock 问答接口。
+- `POST /api/documents/upload` 支持 UTF-8 TXT 文档上传、保存、切分和本地索引。
+- `POST /api/chat` 支持从本地索引检索 sources，并返回 mock answer。
 - 使用 Pydantic 定义 `ChatRequest`、`ChatResponse`、`Source`。
-- 预留文档上传、评估、Embedding、Retriever、Rerank、Repository、ORM 模块。
+- 使用轻量本地 embedding 跑通最小检索链路。
+- 预留真实 Embedding、LLM、Rerank、Repository、ORM 模块。
 - 初始化 sample 文档和 eval 数据文件。
 
 ## Git 与版本控制
@@ -107,8 +109,8 @@ git tag -a v0.1.0 -m "v0.1.0: initialize FastAPI project skeleton"
 
 详细路线图见 [docs/roadmap.md](docs/roadmap.md)。
 
-- [ ] 阶段 0：项目初始化与定题
-- [ ] 阶段 1：最小 RAG 系统
+- [x] 阶段 0：项目初始化与定题
+- [x] 阶段 1：最小 RAG 系统
 - [ ] 阶段 2：文档入库 pipeline
 - [ ] 阶段 3：chunk size 与 overlap 实验
 - [ ] 阶段 4：检索方式对比

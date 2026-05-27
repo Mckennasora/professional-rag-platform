@@ -2,5 +2,7 @@ from pydantic import BaseModel
 
 
 class DocumentUploadResponse(BaseModel):
-    # TODO: Add document_id, filename, status, and metadata after upload is implemented.
-    message: str
+    document_id: str
+    filename: str
+    chunk_count: int
+    status: str

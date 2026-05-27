@@ -9,6 +9,8 @@ class ChatRequest(BaseModel):
 class Source(BaseModel):
     document_id: str | None = None
     chunk_id: str | None = None
+    source: str | None = None
+    score: float | None = None
     content: str
 
 
