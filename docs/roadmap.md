@@ -43,7 +43,7 @@
 
 参考周期：约 2-4 周
 
-实际完成时间：
+实际完成时间：2026-05-28
 
 目标：
 
@@ -53,10 +53,17 @@
 成果：
 
 - scripts/ingest.py
-- documents 表设计
-- chunks 表设计
-- qa_logs 表设计
-- chunk 元数据：source、page、section、chunk_id
+- documents 表设计：已完成 ORM 草案
+- chunks 表设计：已完成 ORM 草案
+- qa_logs 表设计：已完成 ORM 草案
+- chunk 元数据：source、page、section、chunk_id：已在本地索引中保留字段
+
+当前状态：
+
+- 已有 PostgreSQL + 本地 JSON 镜像版入库 pipeline，可支持接口上传和 `scripts/ingest.py` 离线入库。
+- 已记录原文路径、清洗后路径、chunk、embedding model 和问答日志。
+- 已接入 PostgreSQL，`documents`、`chunks`、`qa_logs` 表可自动创建。
+- 当前 embedding 暂以 JSON 字段保存，后续向量检索阶段再迁移到 pgvector `vector` 类型。
 
 ## 阶段 3：chunk size 与 overlap 实验
 

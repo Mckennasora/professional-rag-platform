@@ -84,11 +84,12 @@ uv run pytest
 
 - FastAPI 应用初始化。
 - `GET /health` 健康检查。
-- `POST /api/documents/upload` 支持 UTF-8 TXT 文档上传、保存、切分和本地索引。
-- `POST /api/chat` 支持从本地索引检索 sources，并返回 mock answer。
+- `POST /api/documents/upload` 支持 UTF-8 TXT 文档上传、原文保存、清洗、切分、轻量 embedding 和本地索引。
+- `POST /api/chat` 支持从本地索引检索 sources，返回 mock answer，并记录本地问答日志。
 - 使用 Pydantic 定义 `ChatRequest`、`ChatResponse`、`Source`。
 - 使用轻量本地 embedding 跑通最小检索链路。
 - 预留真实 Embedding、LLM、Rerank、Repository、ORM 模块。
+- 已定义 `documents`、`chunks`、`qa_logs` SQLAlchemy ORM 模型，数据库由后续环境配置接入。
 - 初始化 sample 文档和 eval 数据文件。
 
 ## Git 与版本控制
@@ -111,7 +112,7 @@ git tag -a v0.1.0 -m "v0.1.0: initialize FastAPI project skeleton"
 
 - [x] 阶段 0：项目初始化与定题
 - [x] 阶段 1：最小 RAG 系统
-- [ ] 阶段 2：文档入库 pipeline
+- [x] 阶段 2：文档入库 pipeline
 - [ ] 阶段 3：chunk size 与 overlap 实验
 - [ ] 阶段 4：检索方式对比
 - [ ] 阶段 5：Rerank 与引用溯源
@@ -124,10 +125,10 @@ git tag -a v0.1.0 -m "v0.1.0: initialize FastAPI project skeleton"
 
 短期扩充：
 
-- 实现 TXT / PDF 文档解析。
-- 实现固定长度 chunk 切分。
-- 使用 sentence-transformers 或 BGE 生成 embedding。
-- 使用 FAISS 或 pgvector 实现向量检索。
+- 接入 PostgreSQL + pgvector，替换当前本地 JSON 索引。
+- 实现 PDF 文档解析。
+- 使用 sentence-transformers 或 BGE 生成真实 embedding。
+- 使用 pgvector 实现向量检索。
 - 接入真实 LLM。
 - 返回 answer + sources。
 

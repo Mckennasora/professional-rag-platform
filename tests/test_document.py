@@ -22,6 +22,8 @@ def test_upload_txt_document_indexes_chunks() -> None:
     assert body["filename"] == "demo.txt"
     assert body["chunk_count"] >= 1
     assert body["status"] == "indexed"
+    assert body["source_path"].endswith("data/raw/demo.txt")
+    assert body["processed_path"].startswith("data/processed/")
 
 
 def test_upload_rejects_non_txt_file() -> None:

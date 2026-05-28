@@ -9,7 +9,7 @@ router = APIRouter(prefix="/documents", tags=["documents"])
 @router.post("/upload", response_model=DocumentUploadResponse)
 async def upload_document(file: UploadFile = File(...)) -> DocumentUploadResponse:
     if not file.filename or not file.filename.lower().endswith(".txt"):
-        raise HTTPException(status_code=400, detail="Only .txt files are supported in stage 1.")
+        raise HTTPException(status_code=400, detail="Only .txt files are supported in stage 2.")
 
     content = await file.read()
     try:

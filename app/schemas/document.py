@@ -6,3 +6,5 @@ class DocumentUploadResponse(BaseModel):
     filename: str
     chunk_count: int
     status: str
+    source_path: str | None = None
+    processed_path: str | None = None

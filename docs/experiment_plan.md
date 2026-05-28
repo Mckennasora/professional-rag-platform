@@ -6,6 +6,7 @@
 
 ## 计划实验
 
+- 阶段 2 数据沉淀：documents、chunks、qa_logs 的字段稳定性。
 - chunk size 与 overlap 对比。
 - BM25 / Vector / Hybrid 检索对比。
 - Hybrid 与 Hybrid + Rerank 对比。

@@ -44,7 +44,20 @@ Response:
 
 ## POST /api/documents/upload
 
-上传 UTF-8 编码的 TXT 文档，完成保存、切分、轻量 embedding 和本地文件索引。
+上传 UTF-8 编码的 TXT 文档，完成原文保存、清洗、切分、轻量 embedding 和本地文件索引。
+
+当前阶段处理流程：
+
+```text
+UploadFile
+  -> 校验 .txt 后缀
+  -> UTF-8 解码
+  -> 保存原文到 data/raw/
+  -> 清洗文本并保存到 data/processed/{document_id}.txt
+  -> 按 CHUNK_SIZE / CHUNK_OVERLAP 切分
+  -> 生成轻量 mock embedding
+  -> 写入 data/processed/index.json
+```
 
 Response:
 
@@ -53,9 +66,13 @@ Response:
   "document_id": "string",
   "filename": "sample.txt",
   "chunk_count": 1,
-  "status": "indexed"
+  "status": "indexed",
+  "source_path": "data/raw/sample.txt",
+  "processed_path": "data/processed/{document_id}.txt"
 }
 ```
+
+TODO: 后续接入 PostgreSQL + pgvector 后，将 `documents`、`chunks` 和 `qa_logs` 写入数据库。
 
 ## GET /api/eval/status
 
