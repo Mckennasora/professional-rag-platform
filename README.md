@@ -75,6 +75,12 @@ uv run uvicorn app.main:app --reload
 uv run pytest
 ```
 
+执行数据库迁移：
+
+```bash
+uv run alembic upgrade head
+```
+
 访问：
 
 - `http://127.0.0.1:8000/health`
@@ -89,7 +95,7 @@ uv run pytest
 - 使用 Pydantic 定义 `ChatRequest`、`ChatResponse`、`Source`。
 - 使用轻量本地 embedding 跑通最小检索链路。
 - 预留真实 Embedding、LLM、Rerank、Repository、ORM 模块。
-- 已定义 `documents`、`chunks`、`qa_logs` SQLAlchemy ORM 模型，数据库由后续环境配置接入。
+- 已定义 `documents`、`chunks`、`qa_logs` SQLAlchemy ORM 模型，并使用 Alembic 管理数据库版本。
 - 初始化 sample 文档和 eval 数据文件。
 
 ## Git 与版本控制

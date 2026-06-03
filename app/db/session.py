@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, inspect
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -21,10 +21,10 @@ def init_db() -> bool:
         return True
 
     try:
-        # Import models here so their metadata is registered before create_all.
-        from app.models import chunk, document, qa_log  # noqa: F401
-
-        Base.metadata.create_all(bind=engine)
+        existing_tables = set(inspect(engine).get_table_names())
+        required_tables = {"documents", "chunks", "qa_logs"}
+        if not required_tables.issubset(existing_tables):
+            return False
         _tables_initialized = True
         return True
     except SQLAlchemyError:

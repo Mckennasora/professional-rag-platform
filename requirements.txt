@@ -16,3 +16,4 @@ pgvector
 ragas
 datasets
 pytest
+alembic

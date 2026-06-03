@@ -22,6 +22,7 @@ dependencies = [
     "pgvector",
     "ragas",
     "datasets",
+    "alembic>=1.18.4",
 ]
 
 [dependency-groups]

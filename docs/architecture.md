@@ -91,13 +91,21 @@ question
 
 ## 阶段 2：文档入库 pipeline
 
-当前阶段先使用本地文件模拟数据库，核心数据统一落到 `data/processed/index.json`：
+当前阶段使用 PostgreSQL 持久化核心数据，同时保留 `data/processed/index.json` 作为本地调试镜像：
 
 - `documents`：保存文档 ID、文件名、原文路径、清洗后路径、状态、chunk 数量。
 - `chunks`：保存 chunk ID、document ID、source、page、section、position、content、embedding、embedding model。
 - `qa_logs`：保存 question、answer、sources、top_k、latency、model 配置。
 
-后续接入 PostgreSQL + pgvector 时，Repository 层会从本地 JSON 切换到数据库，API 和 Service 层尽量保持不变。
+数据库结构由 Alembic 迁移文件管理。Repository 层负责写入 PostgreSQL，并保留本地 JSON 镜像，API 和 Service 层尽量不感知存储实现变化。
+
+常用迁移命令：
+
+```bash
+uv run alembic revision --autogenerate -m "describe schema change"
+uv run alembic upgrade head
+uv run alembic current
+```
 
 ## 数据库表设计草案
 
@@ -124,7 +132,8 @@ question
 - `content`：chunk 原文。
 - `embedding_model`：embedding 模型名。
 - `created_at`：创建时间。
-- TODO: 接入 pgvector 后补 `embedding vector` 字段。
+- `embedding`：当前使用 JSON 保存 mock embedding。
+- TODO: 向量检索阶段迁移为 pgvector `vector` 字段。
 
 `qa_logs`
 
